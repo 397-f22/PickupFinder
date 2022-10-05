@@ -20,14 +20,10 @@ const EventCard = ({ event, users }) => {
                         Date & Time: {event.datetime}
                     </Card.Text>
                     <Card.Text>
-                        Description: {event.description}
-                    </Card.Text>
-                    <Card.Text>
                         Capacity: {event.size} / {event.cap}
                     </Card.Text>
                     <hr></hr>
                     <Button variant="primary" onClick={() => {
-                        console.log("Hello world");
                         openEventDetailsModal();
                     }}>See attendees</Button>
                     <Button variant="primary ms-3" disabled={event.size === event.cap} > Join Event</Button>
