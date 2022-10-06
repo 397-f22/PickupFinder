@@ -10,7 +10,7 @@ const EventCard = ({ event, users }) => {
     return (
         <div>
             <EventDetailsModal event={event} users={users} isVisible={isEventDetailsModalVisible} closeEventDetailsModal={closeEventDetailsModal} />
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} className="m-1">
                 <Card.Header><Card.Title>{event.title}</Card.Title></Card.Header>
                 <Card.Body>
                     <Card.Text>
