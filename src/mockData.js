@@ -27,51 +27,49 @@ export const pickupData = {
         },
     },
     events: {
-        "Basketball": {
-            "1": {
-                datetime: "10/4/2022 @ 7PM",
-                location: "Henry Crown Sports Pavilion (SPAC) Courts",
-                attendees: ["1", "2", "3"],
-                organizer: "1",
-                title: "Pickup Basketball Game",
-                description: "Casual pickup basketball game - full court 5v5s",
-                size: 3,
-                cap: 15
-            },
-            "2": {
-                datetime: "10/21/2022 @ 7PM",
-                location: "Henry Crown Sports Pavilion (SPAC) Courts",
-                attendees: ["1"],
-                organizer: "1",
-                title: "Pickup Basketball Game",
-                description: "Competitive pickup basketball game - full court 5v5s",
-                size: 10,
-                cap: 10
-            },
-            "3": {
-                datetime: "10/27/2022 @ 7PM",
-                location: "Henry Crown Sports Pavilion (SPAC) Courts",
-                attendees: ["1", "2", "3", "4"],
-                organizer: "1",
-                title: "Pickup Basketball Game",
-                description: "Fast-paced pickup basketball game - half court 3v3s",
-                size: 3,
-                cap: 6
-            }
+        "1": {
+            sport: "Basketball",
+            datetime: "10/4/2022 @ 7PM",
+            location: "Henry Crown Sports Pavilion (SPAC) Courts",
+            attendees: ["1", "2", "3"],
+            organizer: "1",
+            title: "Pickup Basketball Game",
+            description: "Casual pickup basketball game - full court 5v5s",
+            size: 3,
+            cap: 15
         },
-        "Soccer": {
-            "1": {
-                datetime: "10/4/2022 @ 10PM",
-                location: "Henry Crown Sports Pavilion (SPAC) Courts",
-                attendees: ["1", "2"],
-                organizer: "2",
-                title: "Pickup Soccer Game",
-                description: "Casual pickup soccer game - indoor futsal",
-                size: 2,
-                cap: 15
-            }
+        "2": {
+            sport: "Basketball",
+            datetime: "10/21/2022 @ 7PM",
+            location: "Henry Crown Sports Pavilion (SPAC) Courts",
+            attendees: ["1"],
+            organizer: "1",
+            title: "Pickup Basketball Game",
+            description: "Competitive pickup basketball game - full court 5v5s",
+            size: 10,
+            cap: 10
+        },
+        "3": {
+            sport: "Basketball",
+            datetime: "10/27/2022 @ 7PM",
+            location: "Henry Crown Sports Pavilion (SPAC) Courts",
+            attendees: ["1", "2", "3", "4"],
+            organizer: "1",
+            title: "Pickup Basketball Game",
+            description: "Fast-paced pickup basketball game - half court 3v3s",
+            size: 3,
+            cap: 6
+        },
+        "4": {
+            sport: "Soccer",
+            datetime: "10/4/2022 @ 10PM",
+            location: "Henry Crown Sports Pavilion (SPAC) Courts",
+            attendees: ["1", "2"],
+            organizer: "2",
+            title: "Pickup Soccer Game",
+            description: "Casual pickup soccer game - indoor futsal",
+            size: 2,
+            cap: 15
         }
-
-
     }
 };
