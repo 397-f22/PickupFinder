@@ -52,7 +52,7 @@ const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
                 <Button onClick={closeEventForm}>Close</Button>
                 <Button onClick={() => {
                     // Add some default values for events
-                    addEvent({ ...state.values, size: 1, attendees: [] });
+                    addEvent({ ...state.values });
                     closeEventForm();
                 }}>Submit</Button>
             </Modal.Footer>

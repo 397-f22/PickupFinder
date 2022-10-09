@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { pickupData } from "../../mockData";
+import { pickupData, currentUser } from "../../mockData";
 import EventCard from "../eventCard/eventCard";
 import MenuBar from "../menuBar/menuBar"
 import Container from "react-bootstrap/Container";
@@ -16,7 +16,7 @@ const Home = () => {
   const [events, setEvents] = useState(pickupData.events);
   const addEvent = (event) => {
     // Todo: replace with a better uuid() function for events
-    setEvents({ ...events, [Object.entries(events).length + 1]: event });
+    setEvents({ ...events, [Object.entries(events).length + 1]: { ...event, attendees: [], organizer: currentUser.id, size: 1 } });
   };
   const openEventForm = () => { setIsEventFormVisible(true) };
   const closeEventForm = () => { setIsEventFormVisible(false) };
