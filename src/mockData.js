@@ -35,7 +35,7 @@ export const pickupData = {
             organizer: "3",
             title: "Pickup Basketball Game",
             description: "Casual pickup basketball game - full court 5v5s",
-            size: 3,
+            size: 2,
             cap: 15
         },
         "2": {
@@ -46,7 +46,7 @@ export const pickupData = {
             organizer: "1",
             title: "Pickup Basketball Game",
             description: "Competitive pickup basketball game - full court 5v5s",
-            size: 10,
+            size: 1,
             cap: 10
         },
         "3": {
@@ -57,7 +57,7 @@ export const pickupData = {
             organizer: "1",
             title: "Pickup Basketball Game",
             description: "Fast-paced pickup basketball game - half court 3v3s",
-            size: 3,
+            size: 4,
             cap: 6
         },
         "4": {

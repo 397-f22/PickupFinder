@@ -8,6 +8,9 @@ const EventCard = ({ event, users, eventId, toggleEvent }) => {
     const [isEventDetailsModalVisible, setIsEventDetailsModalVisible] = useState(false);
     const openEventDetailsModal = () => { setIsEventDetailsModalVisible(true) };
     const closeEventDetailsModal = () => { setIsEventDetailsModalVisible(false) };
+    const isEventAtCapacity = event.size === event.cap;
+    const isCurrentUserInEvent = event.attendees.includes(currentUser.id);
+    const isCurrentUserOrganizer = event.organizer === currentUser.id;
     return (
         <div>
             <EventDetailsModal event={event} users={users} isVisible={isEventDetailsModalVisible} closeEventDetailsModal={closeEventDetailsModal} />
@@ -27,11 +30,11 @@ const EventCard = ({ event, users, eventId, toggleEvent }) => {
                     <Button variant="primary" onClick={() => {
                         openEventDetailsModal();
                     }}>See attendees</Button>
-                    <Button variant="primary ms-3" 
-                            disabled={(event.size === event.cap) || (event.organizer === currentUser.id)} 
-                            onClick={() => {
-                                toggleEvent(event, eventId);
-                            }}>{event.attendees.includes(currentUser.id) ? "Unjoin" : "Join Event" }</Button>
+                    <Button variant={`${isCurrentUserInEvent ? (isCurrentUserOrganizer ? "muted" : "danger") : "primary"} ms-3`}
+                        disabled={isEventAtCapacity || isCurrentUserOrganizer}
+                        onClick={() => {
+                            toggleEvent(event, eventId);
+                        }}>{isCurrentUserInEvent ? "Unjoin" : "Join Event"}</Button>
                 </Card.Body>
             </Card >
         </div>

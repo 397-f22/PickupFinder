@@ -18,11 +18,15 @@ const Home = () => {
     // Todo: replace with a better uuid() function for events    
     setEvents({ ...events, [Object.entries(events).length + 1]: { ...event, attendees: [currentUser.id], organizer: currentUser.id, size: 1 } });
   };
-  const toggleEvent = (event, eventId) => {    
-    event.attendees.includes(currentUser.id)
-    ? event.attendees = event.attendees.filter((e) => (e !== currentUser.id))
-    : event.attendees.push(currentUser.id); 
-    setEvents({ ...events, [eventId]: event });    
+  const toggleEvent = (event, eventId) => {
+    if (event.attendees.includes(currentUser.id)) {
+      event.size -= 1;
+      event.attendees = event.attendees.filter((e) => (e !== currentUser.id))
+    } else {
+      event.size += 1;
+      event.attendees.push(currentUser.id);
+    }
+    setEvents({ ...events, [eventId]: event });
   };
   const openEventForm = () => { setIsEventFormVisible(true) };
   const closeEventForm = () => { setIsEventFormVisible(false) };
