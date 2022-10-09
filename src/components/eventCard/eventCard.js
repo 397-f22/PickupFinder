@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import EventDetailsModal from "../eventDetails/eventDetails";
 import { currentUser } from "../../mockData";
 
-const EventCard = ({ event, users, eventId, joinEvent }) => {
+const EventCard = ({ event, users, eventId, toggleEvent }) => {
     const [isEventDetailsModalVisible, setIsEventDetailsModalVisible] = useState(false);
     const openEventDetailsModal = () => { setIsEventDetailsModalVisible(true) };
     const closeEventDetailsModal = () => { setIsEventDetailsModalVisible(false) };
@@ -28,10 +28,10 @@ const EventCard = ({ event, users, eventId, joinEvent }) => {
                         openEventDetailsModal();
                     }}>See attendees</Button>
                     <Button variant="primary ms-3" 
-                            disabled={(event.size === event.cap) || (event.organizer === currentUser.id || event.attendees.includes(currentUser.id))} 
+                            disabled={(event.size === event.cap) || (event.organizer === currentUser.id)} 
                             onClick={() => {
-                                joinEvent(event, eventId);
-                            }}> Join Event</Button>
+                                toggleEvent(event, eventId);
+                            }}>{event.attendees.includes(currentUser.id) ? "Unjoin" : "Join Event" }</Button>
                 </Card.Body>
             </Card >
         </div>

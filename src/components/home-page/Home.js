@@ -18,8 +18,10 @@ const Home = () => {
     // Todo: replace with a better uuid() function for events    
     setEvents({ ...events, [Object.entries(events).length + 1]: { ...event, attendees: [currentUser.id], organizer: currentUser.id, size: 1 } });
   };
-  const joinEvent = (event, eventId) => {    
-    event.attendees.push(currentUser.id); 
+  const toggleEvent = (event, eventId) => {    
+    event.attendees.includes(currentUser.id)
+    ? event.attendees = event.attendees.filter((e) => (e !== currentUser.id))
+    : event.attendees.push(currentUser.id); 
     setEvents({ ...events, [eventId]: event });    
   };
   const openEventForm = () => { setIsEventFormVisible(true) };
@@ -41,7 +43,7 @@ const Home = () => {
       <Row>
         <Container style={{ display: "flex", flexWrap: "wrap" }}>
           {Object.entries(events).filter(([_, event]) => event.sport === currentSport).map(([eventId, event]) => (
-            <EventCard key={eventId} event={event} users={users} eventId={eventId} joinEvent={joinEvent} />
+            <EventCard key={eventId} event={event} users={users} eventId={eventId} toggleEvent={toggleEvent} />
           ))}
         </Container>
       </Row>
