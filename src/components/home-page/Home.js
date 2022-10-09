@@ -15,8 +15,12 @@ const Home = () => {
   const [isEventFormVisible, setIsEventFormVisible] = useState(false);
   const [events, setEvents] = useState(pickupData.events);
   const addEvent = (event) => {
-    // Todo: replace with a better uuid() function for events
-    setEvents({ ...events, [Object.entries(events).length + 1]: { ...event, attendees: [], organizer: currentUser.id, size: 1 } });
+    // Todo: replace with a better uuid() function for events    
+    setEvents({ ...events, [Object.entries(events).length + 1]: { ...event, attendees: [currentUser.id], organizer: currentUser.id, size: 1 } });
+  };
+  const joinEvent = (event, eventId) => {    
+    event.attendees.push(currentUser.id); 
+    setEvents({ ...events, [eventId]: event });    
   };
   const openEventForm = () => { setIsEventFormVisible(true) };
   const closeEventForm = () => { setIsEventFormVisible(false) };
@@ -37,7 +41,7 @@ const Home = () => {
       <Row>
         <Container style={{ display: "flex", flexWrap: "wrap" }}>
           {Object.entries(events).filter(([_, event]) => event.sport === currentSport).map(([eventId, event]) => (
-            <EventCard key={eventId} event={event} users={users} />
+            <EventCard key={eventId} event={event} users={users} eventId={eventId} joinEvent={joinEvent} />
           ))}
         </Container>
       </Row>
