@@ -1,7 +1,6 @@
 export const currentUser = {
     id: "1"
 };
-
 export const pickupData = {
     sports: ["Basketball", "Soccer"],
     users: {
@@ -25,6 +24,11 @@ export const pickupData = {
             lastName: "Yang",
             email: "zihuiyang2024@u.northwestern.edu"
         },
+        "5": {
+            firstName: "Ping",
+            lastName: "He",
+            email: "pinghe2022@@u.northwestern.edu"
+        }
     },
     events: {
         "1": {

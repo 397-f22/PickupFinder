@@ -30,11 +30,11 @@ const EventCard = ({ event, users, eventId, toggleEvent }) => {
                     <Button variant="primary" onClick={() => {
                         openEventDetailsModal();
                     }}>See attendees</Button>
-                    <Button variant={`${isCurrentUserInEvent ? (isCurrentUserOrganizer ? "muted" : "danger") : "primary"} ms-3`}
-                        disabled={isEventAtCapacity || isCurrentUserOrganizer}
+                    <Button variant={`${isCurrentUserInEvent ? (isCurrentUserOrganizer ? "danger" : "danger") : "primary"} ms-3`}
+                        disabled={isEventAtCapacity}
                         onClick={() => {
-                            toggleEvent(event, eventId);
-                        }}>{isCurrentUserInEvent ? "Unjoin" : "Join Event"}</Button>
+                            toggleEvent(event, eventId,isCurrentUserOrganizer);
+                        }}>{isCurrentUserInEvent ? (isCurrentUserOrganizer?"Discard":"Unjoin") : "Join Event"}</Button>
                 </Card.Body>
             </Card >
         </div>
