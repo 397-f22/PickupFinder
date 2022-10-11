@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
 
 const InputField = ({ name, text, state, change }) => (
     <div className="mb-3">
@@ -20,6 +21,17 @@ export const useFormData = (values = {}) => {
 
     return [state, change];
 };
+
+const SelectBasicExample = ({ name, text, state, change }) => (
+    <div>
+        <label htmlFor={name} className="form-label">{text}</label>
+        <Form.Select id={name} onChange={change}>
+            <option>Select the sport you want to play</option>
+            <option value="Basketball">Basketball</option>
+            <option value="Soccer">Soccer</option>
+        </Form.Select>
+    </div>
+);
 
 const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
 
@@ -44,7 +56,8 @@ const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
                         <InputField name="location" text="Location" state={state} change={change} />
                         <InputField name="datetime" text="Time and Date" state={state} change={change} />
                         <InputField name="cap" text="Capacity" state={state} change={change} />
-                        <InputField name="sport" text="Sport" state={state} change={change} />
+                        {/* <InputField name="sport" text="Sport" state={state} change={change} /> */}
+                        <SelectBasicExample name="sport" text="Sport" state={state} change={change} />
                     </form>
                 </div>
             </Modal.Body>
