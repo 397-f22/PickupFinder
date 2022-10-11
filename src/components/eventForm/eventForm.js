@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
-import Calendar from "react-calendar";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const InputField = ({ name, text, state, change }) => (
     <div className="mb-3">
@@ -38,6 +39,7 @@ const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
 
     const [state, change] = useFormData({});
     const [value, onChange] = useState(new Date());
+    const [date, setDate] = useState(new Date());
     return (
         <Modal
             show={isVisible}
@@ -56,8 +58,21 @@ const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
                         <InputField name="title" text="Title" state={state} change={change} />
                         <InputField name="description" text="Description" state={state} change={change} />
                         <InputField name="location" text="Location" state={state} change={change} />
-                        <InputField name="datetime" text="Time and Date" state={state} change={change} />
-                        <Calendar onChange={onChange} value={value} />
+                        {/* <InputField name="datetime" text="Time and Date" state={state} change={change} /> */}
+                        <DatePicker
+                            id="datetime"
+                            selected={date}
+                            onChange={(date) => {
+                                setDate(date);
+                                // change({"target": {
+                                //     "id": "datetime",
+                                //     "value": date
+                                //     }
+                                // });
+                            }}
+                            showTimeSelect
+                            dateFormat="Pp"
+                        />
                         {/* <InputField name="cap" text="Capacity" state={state} change={change} /> */}
                         {/* <InputField name="sport" text="Sport" state={state} change={change} /> */}
                         <SelectBasicExample name="sport" text="Sport" state={state} change={change} />
