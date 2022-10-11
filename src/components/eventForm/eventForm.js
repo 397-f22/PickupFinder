@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+import Calendar from "react-calendar";
 
 const InputField = ({ name, text, state, change }) => (
     <div className="mb-3">
@@ -36,6 +37,7 @@ const SelectBasicExample = ({ name, text, state, change }) => (
 const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
 
     const [state, change] = useFormData({});
+    const [value, onChange] = useState(new Date());
     return (
         <Modal
             show={isVisible}
@@ -55,7 +57,8 @@ const EventForm = ({ isVisible, closeEventForm, addEvent }) => {
                         <InputField name="description" text="Description" state={state} change={change} />
                         <InputField name="location" text="Location" state={state} change={change} />
                         <InputField name="datetime" text="Time and Date" state={state} change={change} />
-                        <InputField name="cap" text="Capacity" state={state} change={change} />
+                        <Calendar onChange={onChange} value={value} />
+                        {/* <InputField name="cap" text="Capacity" state={state} change={change} /> */}
                         {/* <InputField name="sport" text="Sport" state={state} change={change} /> */}
                         <SelectBasicExample name="sport" text="Sport" state={state} change={change} />
                     </form>
