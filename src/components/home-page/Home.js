@@ -47,7 +47,7 @@ const Home = () => {
     setEvToDel(-1);
     console.log(newEvents);
   }
-  
+
   return (
     <Container fluid="true" >
       <EventForm isVisible={isEventFormVisible} closeEventForm={closeEventForm} addEvent={addEvent} />
@@ -66,7 +66,7 @@ const Home = () => {
           {Object.entries(events).filter(([_, event]) => event.sport === currentSport).map(([eventId, event]) => (
             <EventCard key={eventId} event={event} users={users} eventId={eventId} toggleEvent={toggleEvent} />
           ))}
-          <ConfirmModal del={deleteEvent} showModal={isConfirmModalVisible} hide={()=>setIsConfirmModalVisible(false)} />
+          <ConfirmModal del={deleteEvent} showModal={isConfirmModalVisible} hide={() => setIsConfirmModalVisible(false)} />
         </Container>
       </Row>
     </Container>
