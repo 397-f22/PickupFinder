@@ -45,7 +45,6 @@ const Home = () => {
     setEvents(newEvents);
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
-    console.log(newEvents);
   }
 
   return (
