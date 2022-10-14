@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 export const useFormData = (values = {}) => {
     const [state, setState] = useState(() => ({ values }));
     const change = (evt) => {
         const { id, value } = evt.target;
-        const values = { ...state.values, [id]: value };
-        setState({ values });
+        if (id === "datetime") {
+            // parse the datetime value
+            var date = new Date(value);
+            date = new Intl.DateTimeFormat('en-US',{ dateStyle: 'short', timeStyle: 'short' }).format(date);
+            const newValues = { ...state.values, [id]: date.replace(",", "@") };
+            setState({ values: newValues });
+        }else{
+            const values = { ...state.values, [id]: value };
+            setState({ values });
+        }
     };
     return [state, change];
 };
@@ -23,14 +29,20 @@ const InputField = ({ name, text, state, change }) => (
 );
 
 const InputDatetimeField = ({ name, state, change }) => (
-    <DatePicker
-        selected={state.values.datetime}
-        onChange={(date) => {
-            change({ target: { id: name, value: date } })
-        }}
-        showTimeSelect
-        dateFormat="Pp"
-    />
+    <div>
+        <label htmlFor={name} className="form-label">Pick time</label>
+        <input type="datetime-local" className="form-control mb-3"id= {name}
+       name={name} onChange={change}>
+        </input>
+    </div>
+    // <DatePicker
+    //     selected={state.values.datetime}
+    //     onChange={(date) => {
+    //         change({ target: { id: name, value: date } })
+    //     }}
+    //     showTimeSelect
+    //     dateFormat="Pp"
+    // />
 )
 
 
