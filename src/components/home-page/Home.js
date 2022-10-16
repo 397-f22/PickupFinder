@@ -1,26 +1,38 @@
 import React, { useState } from "react";
 import { pickupData, currentUser } from "../../mockData";
 import EventCard from "../eventCard/eventCard";
-import MenuBar from "../menuBar/menuBar"
+import MenuBar from "../menuBar/menuBar";
 import Container from "react-bootstrap/Container";
 import SportSelector from "../sportSelector/sportSelector";
 import { Row } from "react-bootstrap";
 import EventForm from "../eventForm/eventForm";
 import ConfirmModal from "./confirm";
+import { useDbData, useDbUpdate } from "../../utilities/firebase";
 
 const Home = () => {
-
-  const { users, sports } = pickupData;
-  const defaultSport = sports[0];
-  const [currentSport, setCurrentSport] = useState(defaultSport);
+  const [data, error] = useDbData("/");
+  const [currentSport, setCurrentSport] = useState("Basketball");
   const [isEventFormVisible, setIsEventFormVisible] = useState(false);
-  const [events, setEvents] = useState(pickupData.events);
   const [evToDel, setEvToDel] = useState(-1);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
+
+  if (error) return <h1>Error loading data: {`${error}`}</h1>;
+  if (data === undefined) return <h1>Loading data...</h1>;
+  if (!data) return <h1>No data found</h1>;
+
+  const { events, sports, users } = data;
+
   const addEvent = (event) => {
-    // Todo: replace with a better uuid() function for events    
-    setEvents({ ...events, [Object.entries(events).length + 1]: { ...event, attendees: [currentUser.id], organizer: currentUser.id, size: 1 } });
+    const uuid = Object.entries(events).length + 1;
+    const event_data = {
+      ...event,
+      attendees: [currentUser.id],
+      organizer: currentUser.id,
+      size: 1,
+    };
+    useDbUpdate("/events/" + uuid, event_data);
   };
+
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
     if (isCurrentUserOrganizer) {
       setEvToDel(eventId);
@@ -28,28 +40,34 @@ const Home = () => {
     } else {
       if (event.attendees.includes(currentUser.id)) {
         event.size -= 1;
-        event.attendees = event.attendees.filter((e) => (e !== currentUser.id))
+        event.attendees = event.attendees.filter((e) => e !== currentUser.id);
       } else {
         event.size += 1;
         event.attendees.push(currentUser.id);
       }
-      setEvents({ ...events, [eventId]: event });
     }
   };
-  const openEventForm = () => { setIsEventFormVisible(true) };
-  const closeEventForm = () => { setIsEventFormVisible(false) };
+  const openEventForm = () => {
+    setIsEventFormVisible(true);
+  };
+  const closeEventForm = () => {
+    setIsEventFormVisible(false);
+  };
 
   const deleteEvent = () => {
     const newEvents = { ...events };
     delete newEvents[evToDel];
-    setEvents(newEvents);
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
-  }
+  };
 
   return (
-    <Container fluid="true" >
-      <EventForm isVisible={isEventFormVisible} closeEventForm={closeEventForm} addEvent={addEvent} />
+    <Container fluid="true">
+      <EventForm
+        isVisible={isEventFormVisible}
+        closeEventForm={closeEventForm}
+        addEvent={addEvent}
+      />
       <Row className="mb-3">
         <MenuBar openEventForm={openEventForm} />
       </Row>
@@ -62,14 +80,25 @@ const Home = () => {
       </Row>
       <Row>
         <Container style={{ display: "flex", flexWrap: "wrap" }}>
-          {Object.entries(events).filter(([_, event]) => event.sport === currentSport).map(([eventId, event]) => (
-            <EventCard key={eventId} event={event} users={users} eventId={eventId} toggleEvent={toggleEvent} />
-          ))}
-          <ConfirmModal del={deleteEvent} showModal={isConfirmModalVisible} hide={() => setIsConfirmModalVisible(false)} />
+          {Object.entries(events)
+            .filter(([_, event]) => event.sport === currentSport)
+            .map(([eventId, event]) => (
+              <EventCard
+                key={eventId}
+                event={event}
+                users={users}
+                eventId={eventId}
+                toggleEvent={toggleEvent}
+              />
+            ))}
+          <ConfirmModal
+            del={deleteEvent}
+            showModal={isConfirmModalVisible}
+            hide={() => setIsConfirmModalVisible(false)}
+          />
         </Container>
       </Row>
     </Container>
-
   );
 };
 
