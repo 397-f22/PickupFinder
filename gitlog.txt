@@ -1,0 +1,172 @@
+commit 298983fa27007f706e75840348147041be866dcc
+Author: derrickrosefan <114096803+derrickrosefan@users.noreply.github.com>
+Date:   Thu Oct 13 17:25:24 2022 -0500
+
+    fixed form submission for datetime
+
+M	src/components/eventForm/eventForm.js
+M	src/components/home-page/Home.js
+
+commit c33eb83ed3f351194e6dcefd9c68dcaa5b28b848
+Author: alfenn <52635707+alfenn@users.noreply.github.com>
+Date:   Tue Oct 11 18:43:15 2022 -0500
+
+    add datepicker (buggy-doesn't update form)
+
+M	package-lock.json
+M	package.json
+M	src/components/eventForm/eventForm.js
+
+commit 06aa43f9b1c64f259116cd2008795e9649a7b492
+Author: Ping <pinghe2022@u.northwestern.edu>
+Date:   Tue Oct 11 18:17:55 2022 -0500
+
+    Date picker 0.1
+
+M	package-lock.json
+M	package.json
+M	src/components/eventForm/eventForm.js
+
+commit 166808fd2d20be5d9e1cafdcd3b1dafc646140b7
+Author: ZHYangRoger <78511621+ZHYangRoger@users.noreply.github.com>
+Date:   Tue Oct 11 17:55:59 2022 -0500
+
+    sports-dropdown
+
+M	src/components/eventForm/eventForm.js
+
+commit d7591a8bbbecd3cbafe96e197c35822ae3832b35
+Author: Ping <pinghe2022@u.northwestern.edu>
+Date:   Mon Oct 10 00:12:33 2022 -0500
+
+    Discard Event
+
+M	src/components/eventCard/eventCard.js
+M	src/components/home-page/Home.js
+A	src/components/home-page/confirm.js
+M	src/mockData.js
+
+commit 9748fff2b9384e8199a198c12385f5dfe0bcca5b
+Author: derrickrosefan <114096803+derrickrosefan@users.noreply.github.com>
+Date:   Sun Oct 9 16:30:54 2022 -0500
+
+    stylistic fixes for join event
+
+M	src/components/eventCard/eventCard.js
+M	src/components/home-page/Home.js
+M	src/mockData.js
+
+commit 0ec52e4159e46188d97f7e34e02917792f26f6d2
+Author: ZHYangRoger <78511621+ZHYangRoger@users.noreply.github.com>
+Date:   Sun Oct 9 16:15:27 2022 -0500
+
+    unjoin
+
+M	src/components/eventCard/eventCard.js
+M	src/components/home-page/Home.js
+
+commit 13d6da763205f8bd5a55b865a437e3907736d109
+Author: alfenn <52635707+alfenn@users.noreply.github.com>
+Date:   Sun Oct 9 15:47:27 2022 -0500
+
+    add join event functionality
+
+M	src/components/eventCard/eventCard.js
+M	src/components/home-page/Home.js
+M	src/mockData.js
+
+commit ce03c2ccfd74849e875706d679ba08746cba3d45
+Author: derrickrosefan <114096803+derrickrosefan@users.noreply.github.com>
+Date:   Fri Oct 7 23:40:43 2022 -0500
+
+    fixes to add event code
+
+M	src/components/eventForm/eventForm.js
+M	src/components/home-page/Home.js
+
+commit 17481413aa9243e5a8b4790c52260b9686b5d75d
+Author: derrickrosefan <114096803+derrickrosefan@users.noreply.github.com>
+Date:   Fri Oct 7 10:57:16 2022 -0500
+
+    add events workflow
+
+A	src/components/eventForm/eventForm.js
+M	src/components/home-page/Home.js
+A	src/components/menuBar/menuBar.js
+M	src/mockData.js
+
+commit 306d2bab697b97a79294f8b347533ae216798856
+Author: alfenn <52635707+alfenn@users.noreply.github.com>
+Date:   Thu Oct 6 12:12:33 2022 -0500
+
+    styled the homepage
+
+M	src/components/eventCard/eventCard.js
+M	src/components/home-page/Home.js
+
+commit 9acbb8bf7559267395197962b85de621db110a0a
+Author: derrickrosefan <114096803+derrickrosefan@users.noreply.github.com>
+Date:   Wed Oct 5 17:15:28 2022 -0500
+
+    styled the event details modal
+
+M	src/components/eventCard/eventCard.js
+M	src/components/eventDetails/eventDetails.js
+
+commit aca13ec85a12690d4dec887d4454a888bce6e35b
+Author: derrickrosefan <114096803+derrickrosefan@users.noreply.github.com>
+Date:   Tue Oct 4 18:48:36 2022 -0500
+
+    home screen + radio buttons + cards + attendees modal
+
+M	public/index.html
+D	src/App.css
+A	src/components/eventCard/eventCard.js
+A	src/components/eventDetails/eventDetails.js
+M	src/components/home-page/Home.js
+A	src/components/sportSelector/sportSelector.js
+D	src/index.css
+M	src/index.js
+A	src/mockData.js
+
+commit 476d17ba9c8f9c6925afcbc1e020d495188d765a
+Author: Camilo <camilochafloque@gmail.com>
+Date:   Tue Oct 4 13:11:30 2022 -0500
+
+    Firebase deployment and db config done
+
+A	.firebase/hosting.YnVpbGQ.cache
+A	.firebaserc
+A	firebase.json
+M	package-lock.json
+M	package.json
+M	public/index.html
+A	public/logo.svg
+M	src/App.js
+A	src/components/home-page/Home.js
+A	src/utilities/firebase.js
+
+commit 1657cd7055fd1cfe2541e8f77edc0b9465516613
+Author: Camilo <camilochafloque@gmail.com>
+Date:   Tue Oct 4 12:29:13 2022 -0500
+
+    Initialize project using Create React App
+
+A	.gitignore
+A	README.md
+A	package-lock.json
+A	package.json
+A	public/favicon.ico
+A	public/index.html
+A	public/logo192.png
+A	public/logo512.png
+A	public/manifest.json
+A	public/robots.txt
+A	src/App.css
+A	src/App.js
+A	src/App.test.js
+A	src/index.css
+A	src/index.js
+A	src/logo.svg
+A	src/reportWebVitals.js
+A	src/setupTests.js

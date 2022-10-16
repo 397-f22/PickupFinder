@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 const EventDetailsModalAttendeesCard = ({ attendee, variant }) => (
     <div>
         <Badge pill bg={variant}>
-            {attendee.firstName} {attendee.lastName}
+            {attendee.displayName}
         </Badge>{' '}
     </div>
 );

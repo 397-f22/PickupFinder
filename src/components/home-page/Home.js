@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { pickupData, currentUser } from "../../mockData";
 import EventCard from "../eventCard/eventCard";
 import MenuBar from "../menuBar/menuBar";
 import Container from "react-bootstrap/Container";
@@ -25,11 +24,12 @@ const Home = () => {
   if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
   if (profileLoading) return <h1>Loading user profile</h1>;
   if (!profile) return <h1>No profile data</h1>;
-  
-
   if (error) return <h1>Error loading data: {`${error}`}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
+
+  const currentUser = profile.user;
+  console.log(currentUser);
 
   const { events, sports, users } = data;
 
@@ -37,11 +37,11 @@ const Home = () => {
     const uuid = Object.entries(events).length + 1;
     const event_data = {
       ...event,
-      attendees: [currentUser.id],
-      organizer: currentUser.id,
+      attendees: [currentUser.uid],
+      organizer: currentUser.uid,
       size: 1,
     };
-    updateEvent({["/events/"+uuid]:event_data});
+    updateEvent({ ["/events/" + uuid]: event_data });
   };
 
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
@@ -49,13 +49,14 @@ const Home = () => {
       setEvToDel(eventId);
       setIsConfirmModalVisible(true);
     } else {
-      if (event.attendees.includes(currentUser.id)) {
+      if (event.attendees.includes(currentUser.uid)) {
         event.size -= 1;
-        event.attendees = event.attendees.filter((e) => e !== currentUser.id);
+        event.attendees = event.attendees.filter((e) => e !== currentUser.uid);
       } else {
         event.size += 1;
-        event.attendees.push(currentUser.id);
+        event.attendees.push(currentUser.uid);
       }
+      updateEvent({ ["/events/" + eventId]: event });
     }
   };
   const openEventForm = () => {
@@ -71,7 +72,7 @@ const Home = () => {
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
     console.log(newEvents);
-    updateEvent({"/events":newEvents});
+    updateEvent({ "/events": newEvents });
   };
   return (
     <Container fluid="true">
@@ -101,6 +102,7 @@ const Home = () => {
                 users={users}
                 eventId={eventId}
                 toggleEvent={toggleEvent}
+                currentUser={profile.user}
               />
             ))}
           <ConfirmModal
