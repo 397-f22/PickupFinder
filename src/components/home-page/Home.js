@@ -8,6 +8,7 @@ import { Row } from "react-bootstrap";
 import EventForm from "../eventForm/eventForm";
 import ConfirmModal from "./confirm";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
+import { useProfile } from "../../utilities/useProfile";
 
 const Home = () => {
   const [data, error] = useDbData("/");
@@ -16,8 +17,15 @@ const Home = () => {
   const [evToDel, setEvToDel] = useState(-1);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [updateEvent, result] = useDbUpdate(
-    "/events/" + Object.entries(events).length + 1
+    "/"
   );
+
+  // user profile
+  const [profile, profileError, profileLoading] = useProfile();
+  if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
+  if (profileLoading) return <h1>Loading user profile</h1>;
+  if (!profile) return <h1>No profile data</h1>;
+  
 
   if (error) return <h1>Error loading data: {`${error}`}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
@@ -26,13 +34,14 @@ const Home = () => {
   const { events, sports, users } = data;
 
   const addEvent = (event) => {
+    const uuid = Object.entries(events).length + 1;
     const event_data = {
       ...event,
       attendees: [currentUser.id],
       organizer: currentUser.id,
       size: 1,
     };
-    updateEvent(event_data);
+    updateEvent({["/events/"+uuid]:event_data});
   };
 
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
@@ -61,8 +70,9 @@ const Home = () => {
     delete newEvents[evToDel];
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
+    console.log(newEvents);
+    updateEvent({"/events":newEvents});
   };
-
   return (
     <Container fluid="true">
       <EventForm
@@ -71,7 +81,7 @@ const Home = () => {
         addEvent={addEvent}
       />
       <Row className="mb-3">
-        <MenuBar openEventForm={openEventForm} />
+        <MenuBar openEventForm={openEventForm} user={profile} />
       </Row>
       <Row className="pb-3">
         <SportSelector
