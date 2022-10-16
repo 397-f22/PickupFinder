@@ -28,7 +28,8 @@ const Home = () => {
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
 
-  const currentUser = profile.user;
+
+  const currentUser = profile.user ?? {'uid': 'guest'};
   console.log(currentUser);
 
   const { events, sports, users } = data;
@@ -102,7 +103,7 @@ const Home = () => {
                 users={users}
                 eventId={eventId}
                 toggleEvent={toggleEvent}
-                currentUser={profile.user}
+                currentUser={currentUser}
               />
             ))}
           <ConfirmModal

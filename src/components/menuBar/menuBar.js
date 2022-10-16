@@ -18,11 +18,13 @@ const MenuBar = ({ openEventForm, user }) => {
         <Container>
             <Navbar.Brand href="#">PickupFinder</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            {user.user &&
+            (<Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link href="#" onClick={openEventForm}>Create Event</Nav.Link>
                 </Nav>
-            </Navbar.Collapse>
+            </Navbar.Collapse>)
+            }
             {user.user ? <SignOutButton /> : <SignInButton />}
         </Container>
     </Navbar>)
