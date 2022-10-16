@@ -15,6 +15,9 @@ const Home = () => {
   const [isEventFormVisible, setIsEventFormVisible] = useState(false);
   const [evToDel, setEvToDel] = useState(-1);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
+  const [updateEvent, result] = useDbUpdate(
+    "/events/" + Object.entries(events).length + 1
+  );
 
   if (error) return <h1>Error loading data: {`${error}`}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
@@ -23,14 +26,13 @@ const Home = () => {
   const { events, sports, users } = data;
 
   const addEvent = (event) => {
-    const uuid = Object.entries(events).length + 1;
     const event_data = {
       ...event,
       attendees: [currentUser.id],
       organizer: currentUser.id,
       size: 1,
     };
-    useDbUpdate("/events/" + uuid, event_data);
+    updateEvent(event_data);
   };
 
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
