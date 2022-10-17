@@ -15,7 +15,7 @@ const EventCard = ({ event, users, eventId, toggleEvent, currentUser }) => {
             <EventDetailsModal event={event} users={users} isVisible={isEventDetailsModalVisible} closeEventDetailsModal={closeEventDetailsModal} />
             <Card style={{ width: '18rem' }} className="m-1">
                 <Card.Header><Card.Title>{event.title}</Card.Title></Card.Header>
-                <Card.Body>
+                <Card.Body style={{ height: '15rem' }}>
                     <Card.Text>
                         Location: {event.location}
                     </Card.Text>
@@ -25,18 +25,19 @@ const EventCard = ({ event, users, eventId, toggleEvent, currentUser }) => {
                     <Card.Text>
                         Capacity: {event.size} / {event.cap}
                     </Card.Text>
-                    <hr></hr>
+                </Card.Body>
+                <Card.Footer>
                     <Button variant="primary" onClick={() => {
                         openEventDetailsModal();
                     }}>See attendees</Button>
                     {currentUser.uid !== 'guest' &&
-                    (<Button variant={`${isCurrentUserInEvent ? (isCurrentUserOrganizer ? "danger" : "danger") : "primary"} ms-3`}
-                        disabled={isEventAtCapacity}
-                        onClick={() => {
-                            toggleEvent(event, eventId, isCurrentUserOrganizer);
-                        }}>{isCurrentUserInEvent ? (isCurrentUserOrganizer ? "Discard" : "Unjoin") : "Join Event"}</Button>)
+                        (<Button variant={`${isCurrentUserInEvent ? (isCurrentUserOrganizer ? "danger" : "danger") : "primary"} ms-3`}
+                            disabled={isEventAtCapacity}
+                            onClick={() => {
+                                toggleEvent(event, eventId, isCurrentUserOrganizer);
+                            }}>{isCurrentUserInEvent ? (isCurrentUserOrganizer ? "Discard" : "Unjoin") : "Join Event"}</Button>)
                     }
-                </Card.Body>
+                </Card.Footer>
             </Card >
         </div>
     );

@@ -9,10 +9,10 @@ export const useFormData = (values = {}) => {
         if (id === "datetime") {
             // parse the datetime value
             var date = new Date(value);
-            date = new Intl.DateTimeFormat('en-US',{ dateStyle: 'short', timeStyle: 'short' }).format(date);
-            const newValues = { ...state.values, [id]: date.replace(",", "@") };
+            date = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' }).format(date);
+            const newValues = { ...state.values, [id]: date.replace(",", " @") };
             setState({ values: newValues });
-        }else{
+        } else {
             const values = { ...state.values, [id]: value };
             setState({ values });
         }
@@ -31,8 +31,8 @@ const InputField = ({ name, text, state, change }) => (
 const InputDatetimeField = ({ name, state, change }) => (
     <div>
         <label htmlFor={name} className="form-label">Pick time</label>
-        <input type="datetime-local" className="form-control mb-3"id= {name}
-       name={name} onChange={change}>
+        <input type="datetime-local" className="form-control mb-3" id={name}
+            name={name} onChange={change}>
         </input>
     </div>
     // <DatePicker
