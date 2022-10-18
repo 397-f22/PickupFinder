@@ -8,6 +8,7 @@ import EventForm from "../eventForm/eventForm";
 import ConfirmModal from "./confirm";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
 import { useProfile } from "../../utilities/useProfile";
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
   const [data, error] = useDbData("/");
@@ -29,13 +30,12 @@ const Home = () => {
   if (!data) return <h1>No data found</h1>;
 
 
-  const currentUser = profile.user ?? {'uid': 'guest'};
-  console.log(currentUser);
+  const currentUser = profile.user ?? { 'uid': 'guest' };
 
   const { events, sports, users } = data;
 
   const addEvent = (event) => {
-    const uuid = Object.entries(events).length + 1;
+    const uuid = uuidv4();
     const event_data = {
       ...event,
       attendees: [currentUser.uid],
