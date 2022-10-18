@@ -29,7 +29,6 @@ const Home = () => {
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
 
-
   const currentUser = profile.user ?? { 'uid': 'guest' };
 
   const { events, sports, users } = data;
