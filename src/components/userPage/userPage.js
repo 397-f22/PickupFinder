@@ -58,8 +58,6 @@ const UserPage = () => {
 
     return (
         <>
-        {profile.user && 
-        (<MenuBar openEventForm={"disabled"} user={currentUser}/>)}
         <Container style={{ display: "flex", flexWrap: "wrap" }}>
           {Object.entries(events)
             .filter(([_, event]) => event.sport === "Basketball")
