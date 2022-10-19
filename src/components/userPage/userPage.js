@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useProfile } from "../../utilities/useProfile";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
-import MenuBar from "../menuBar/menuBar";
 import EventCard from "../eventCard/eventCard";
 import ConfirmModal from "../home-page/confirm";
 import { Container } from "react-bootstrap";
@@ -50,17 +49,18 @@ const UserPage = () => {
     delete newEvents[evToDel];
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
-    console.log(newEvents);
     updateEvent({ "/events": newEvents });
     };
 
-    
+  
+    const userEvents = Object.entries(events).filter((evt) => evt[1].attendees.includes(currentUser))
+   
 
     return (
         <>
         <Container style={{ display: "flex", flexWrap: "wrap" }}>
-          {Object.entries(events)
-            .filter(([_, event]) => event.sport === "Basketball")
+          {userEvents
+            .filter(([_, event]) => event.sport === "Basketball" || event.sport === "Soccer")
             .map(([eventId, event]) => (
               <EventCard
                 key={eventId}
