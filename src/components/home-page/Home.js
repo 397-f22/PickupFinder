@@ -1,19 +1,15 @@
 import React, { useState } from "react";
+import Row from 'react-bootstrap/Row'
 import EventCard from "../eventCard/eventCard";
-import MenuBar from "../menuBar/menuBar";
 import Container from "react-bootstrap/Container";
 import SportSelector from "../sportSelector/sportSelector";
-import { Row } from "react-bootstrap";
-import EventForm from "../eventForm/eventForm";
 import ConfirmModal from "./confirm";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
 import { useProfile } from "../../utilities/useProfile";
-import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
   const [data, error] = useDbData("/");
   const [currentSport, setCurrentSport] = useState("Basketball");
-  const [isEventFormVisible, setIsEventFormVisible] = useState(false);
   const [evToDel, setEvToDel] = useState(-1);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [updateEvent, result] = useDbUpdate(
@@ -34,16 +30,6 @@ const Home = () => {
 
   const { events, sports, users } = data;
 
-  const addEvent = (event) => {
-    const uuid = uuidv4();
-    const event_data = {
-      ...event,
-      attendees: [currentUser.uid],
-      organizer: currentUser.uid,
-      size: 1,
-    };
-    updateEvent({ ["/events/" + uuid]: event_data });
-  };
 
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
     if (isCurrentUserOrganizer) {
@@ -60,12 +46,6 @@ const Home = () => {
       updateEvent({ ["/events/" + eventId]: event });
     }
   };
-  const openEventForm = () => {
-    setIsEventFormVisible(true);
-  };
-  const closeEventForm = () => {
-    setIsEventFormVisible(false);
-  };
 
   const deleteEvent = () => {
     const newEvents = { ...events };
@@ -77,14 +57,6 @@ const Home = () => {
   };
   return (
     <Container fluid="true">
-      <EventForm
-        isVisible={isEventFormVisible}
-        closeEventForm={closeEventForm}
-        addEvent={addEvent}
-      />
-      <Row className="mb-3">
-        <MenuBar openEventForm={openEventForm} user={profile} />
-      </Row>
       <Row className="pb-3">
         <SportSelector
           sports={sports}
