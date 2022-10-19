@@ -26,7 +26,7 @@ const UserPage = () => {
     if (!profile) return <h1>No profile data</h1>;  
     
     const { events, sports, users } = data;
-    const currentUser = profile.user.uid
+    const currentUser = profile.user 
 
     const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
     if (isCurrentUserOrganizer) {
@@ -53,8 +53,9 @@ const UserPage = () => {
     };
 
   
-    const userEvents = Object.entries(events).filter((evt) => evt[1].attendees.includes(currentUser))
+    const userEvents = Object.entries(events).filter((evt) => evt[1].attendees.includes(currentUser.uid))
    
+    console.log("Inside userpage " + currentUser)
 
     return (
         <>
