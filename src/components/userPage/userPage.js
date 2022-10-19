@@ -62,7 +62,7 @@ const UserPage = () => {
         <Container>
           <Row>
             <Col xs={6}>
-              <h5 className="rounded-4 p-3 text-center" style={{background: '#fae5cf'}}> Events Organized </h5>
+              <h5 className="rounded-4 p-3 text-center" style={{background: '#fae5cf'}}> Events Joined </h5>
               {userEvents
                 .filter(([_, event]) => event.organizer !== currentUser.uid)
                 .map(([eventId, event]) => (
@@ -77,7 +77,7 @@ const UserPage = () => {
                 ))}
             </Col>
             <Col xs={6}>
-              <h5 className="rounded-4 p-3 text-center" style={{background: '#ffe5e3'}}> Events Joined </h5>
+              <h5 className="rounded-4 p-3 text-center" style={{background: '#ffe5e3'}}> Events Organized </h5>
               {userEvents
               .filter(([_, event]) => event.organizer === currentUser.uid)
               .map(([eventId, event]) => (
