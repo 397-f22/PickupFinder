@@ -10,8 +10,7 @@ function App() {
   if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
   if (profileLoading) return <h1>Loading user profile</h1>;
   if (!profile) return <h1>No profile data</h1>;
-  console.log(profile.user?.uid)
-
+  
   return (
     <div className="container">
       <BrowserRouter>
