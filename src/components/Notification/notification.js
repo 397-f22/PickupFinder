@@ -41,8 +41,6 @@ const Notification = () => {
           setAlerts(newAlerts);
      }
        
-     console.log(alToDel)
-       
      return (
      <>
                <ListGroup>
@@ -53,6 +51,8 @@ const Notification = () => {
                     )}
                </ListGroup>
           <Button
+               className="text-center"
+               variant='danger'
                disabled = {alToDel === -1}
                onClick= {() => setIsConfirmModalVisible(true)}> Delete </Button>
           <ConfirmAlertDelete

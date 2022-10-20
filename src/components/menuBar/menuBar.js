@@ -37,7 +37,7 @@ const MenuBar = ({ openEventForm, user }) => {
           PickupFinder
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        {user.user && window.location.pathname === "/" && (
+        {user.user  && (
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link
@@ -50,7 +50,7 @@ const MenuBar = ({ openEventForm, user }) => {
             </Nav>
           </Navbar.Collapse>
         )}
-        {user.user && window.location.pathname === "/" && (
+        {user.user && !window.location.pathname.includes('user') && (
           <Nav className="me-auto">
             <Nav.Link
               href={`/user/${user.user?.uid}`}
@@ -61,10 +61,14 @@ const MenuBar = ({ openEventForm, user }) => {
           </Nav>
         )}
        
-          <Nav className="me-auto">
+          <Nav className="me-auto px-3">
             <Nav.Link
               href={`/notification/`}
-              className = "bi bi-bell-fill text-light"
+              className = "bi bi-bell-fill rounded-3"
+              style={{
+               color:'white',
+               backgroundColor: 'rgb(0, 191, 255)',
+               display: 'flex'}}
             >
             </Nav.Link> 
           </Nav>
