@@ -53,6 +53,8 @@ const Notification = () => {
                     )}
                </ListGroup>
           <Button
+               className="my-auto"
+               variant='danger'
                disabled = {alToDel === -1}
                onClick= {() => setIsConfirmModalVisible(true)}> Delete </Button>
           <ConfirmAlertDelete
