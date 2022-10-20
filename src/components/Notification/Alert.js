@@ -1,12 +1,15 @@
 import { ListGroup } from 'react-bootstrap';
-import CloseButton from 'react-bootstrap/CloseButton';
+import Form from 'react-bootstrap/Form'
 
 const Alert = ({alertId, alert, toggleEvent}) => {
          return (
             <>
                  <ListGroup.Item>
                   {alert}
-                  <CloseButton aria-label="Hide" onClick= {() => toggleEvent(alertId)}/>
+                  <Form.Check 
+                     type='checkbox'
+                     onClick= {() => toggleEvent(alertId)}
+                  />
                   </ListGroup.Item>
             </>
          );

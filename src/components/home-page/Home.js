@@ -50,10 +50,10 @@ const Home = () => {
 
   const deleteEvent = () => {
     const newEvents = { ...events };
+    // useAddAlert to add evToDel to alerts
     delete newEvents[evToDel];
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
-    console.log(newEvents);
     updateEvent({ "/events": newEvents });
   };
   return (
