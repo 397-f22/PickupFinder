@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "pickupfinder-2b313"
-  }
+  },
+  "targets": {
+    "pickupfinder-2b313": {
+      "hosting": {
+        "app": [
+          "pickupfinder-51e59"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
