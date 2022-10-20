@@ -60,6 +60,14 @@ const MenuBar = ({ openEventForm, user }) => {
             </Nav.Link>
           </Nav>
         )}
+       
+          <Nav className="me-auto">
+            <Nav.Link
+              href={`/notification/`}
+              className = "bi bi-bell-fill text-light"
+            >
+            </Nav.Link> 
+          </Nav>
         {user.user ? <SignOutButton /> : <SignInButton />}
       </Container>
     </Navbar>
