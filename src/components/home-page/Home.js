@@ -7,6 +7,7 @@ import ConfirmModal from "./confirm";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
 import { useProfile } from "../../utilities/useProfile";
 
+
 const Home = () => {
   const [data, error] = useDbData("/");
   const [currentSport, setCurrentSport] = useState("Basketball");

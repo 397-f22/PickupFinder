@@ -77,3 +77,11 @@ export const pickupData = {
         }
     }
 };
+export const alertNotification = {
+    "1": "Event 1 has been removed",
+    "2": "Event 2 has been removed",
+    "3": "Event 3 has been removed",
+    "4": "Event 4 has been removed",
+    "5": "Event 5 has been removed",
+    "6": "Event 6 has been removed",
+}
