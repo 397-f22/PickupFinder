@@ -9,8 +9,12 @@ const Alert = ({alertId, alert, toggleEvent}) => {
                      type='checkbox'
                      onClick= {() => toggleEvent(alertId)}
                   />
-                 <ListGroup.Item className='mb-3 col-6'>
-                  {alert}
+                 <ListGroup.Item className='mb-3 col-6 bg-light'>
+                  <Row> 
+                     {alert.title && <h5 className='col-2 my-auto py-2 bg-white text-center'> {alert.title} </h5>}
+                     <div className='col'> {alert.message} </div>
+                  </Row>
+                  
                   </ListGroup.Item>
             </Row>
          );

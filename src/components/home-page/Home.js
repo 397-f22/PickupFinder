@@ -32,7 +32,6 @@ const Home = () => {
 
   const { events, notifications, sports, users } = data;
 
-  console.log(notifications)
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
     if (isCurrentUserOrganizer) {
       setEvToDel(eventId);
@@ -50,12 +49,11 @@ const Home = () => {
   };
 
   const addAlert = ({evToDel}) => {
-    console.log(currentUser)
     const evt = events[evToDel]
-    console.log(events[evToDel])
     const auid = Date.now()
-    const message = `${evt.title ?? 'Event'} scheduled on ${evt.datetime} has been cancelled.`
-    updateNotifications({[`/notifications/${currentUser.uid}/${auid}`]: {sport:evt.sport, message:message}})
+    const message = `${evt.sport} scheduled ${evt.datetime}, ${evt.location ?? ''} has been cancelled.`
+    updateNotifications({[`/notifications/${currentUser.uid}/${auid}`]: 
+                                        {title:evt.title ?? null, message:message}})
 
   }
 

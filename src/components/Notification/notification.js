@@ -6,12 +6,20 @@ import { alertNotification } from "../../mockData";
 import Alert from './Alert';
 import ConfirmAlertDelete from './confirmAlertDelete';
 import Button from 'react-bootstrap/Button';
+import { useDbData, useDbUpdate } from '../../utilities/firebase';
 
 
-const Notification = () => {
+const Notification = ({uid}) => {
+     const [data, error] = useDbData(`/notifications/`);
      const [alerts, setAlerts] = useState(alertNotification)
      const [alToDel, setAlToDel] = useState(-1)
      const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
+
+     if (error) return <h1>Error loading data: {`${error}`}</h1>;
+     if (data === undefined) return <h1>Loading data...</h1>;
+     if (!data) return <h1>No data found</h1>;
+     const alerts1 = data[uid]
+     console.log(alerts1)
      
      
      const toggleEvent = (alertId) => {
@@ -44,7 +52,7 @@ const Notification = () => {
      return (
      <>
                <ListGroup>
-                    {Object.entries(alerts).map(([id, alert])=> 
+                    {Object.entries(alerts1).map(([id, alert])=> 
                     <div>
                     <Alert alertId={id} alert={alert}  toggleEvent={toggleEvent}/>
                     </div>
