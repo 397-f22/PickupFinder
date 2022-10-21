@@ -10,7 +10,7 @@ const Pages = ({profile}) => {
                <Routes>
                     <Route path="/" element={<Home />} />
                     {profile.user?.uid && <Route path={`/user/${profile.user.uid}`} element={<UserPage />}/>}
-                    <Route path={`/notification/`} element={<Notification/>}/>
+                    <Route path={`/notifications/`} element={<Notification/>}/>
                    
 
                </Routes>

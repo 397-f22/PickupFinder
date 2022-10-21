@@ -63,7 +63,7 @@ const MenuBar = ({ openEventForm, user }) => {
        
           <Nav className="me-auto px-3">
             <Nav.Link
-              href={`/notification/`}
+              href={`/notifications/`}
               className = "bi bi-bell-fill rounded-3"
               style={{
                color:'white',

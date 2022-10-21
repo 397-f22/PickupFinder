@@ -16,6 +16,7 @@ const Home = () => {
   const [updateEvent, result] = useDbUpdate(
     "/"
   );
+  const [updateNotifications, resultNotification] = useDbUpdate("/")
 
   // user profile
   const [profile, profileError, profileLoading] = useProfile();
@@ -29,9 +30,9 @@ const Home = () => {
 
   const currentUser = profile.user ?? { 'uid': 'guest' };
 
-  const { events, sports, users } = data;
+  const { events, notifications, sports, users } = data;
 
-
+  console.log(notifications)
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
     if (isCurrentUserOrganizer) {
       setEvToDel(eventId);
@@ -48,9 +49,20 @@ const Home = () => {
     }
   };
 
+  const addAlert = ({evToDel}) => {
+    console.log(currentUser)
+    const evt = events[evToDel]
+    console.log(events[evToDel])
+    const auid = Date.now()
+    const message = `${evt.title ?? 'Event'} scheduled on ${evt.datetime} has been cancelled.`
+    updateNotifications({[`/notifications/${currentUser.uid}/${auid}`]: {sport:evt.sport, message:message}})
+
+  }
+
   const deleteEvent = () => {
     const newEvents = { ...events };
-    // useAddAlert to add evToDel to alerts
+    // AddAlert to add evToDel to alerts
+    addAlert({evToDel})
     delete newEvents[evToDel];
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
