@@ -7,6 +7,7 @@ import ConfirmModal from "./confirm";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
 import { useProfile } from "../../utilities/useProfile";
 
+
 const Home = () => {
   const [data, error] = useDbData("/");
   const [currentSport, setCurrentSport] = useState("Basketball");
@@ -15,6 +16,7 @@ const Home = () => {
   const [updateEvent, result] = useDbUpdate(
     "/"
   );
+  const [updateNotifications, resultNotification] = useDbUpdate("/")
 
   // user profile
   const [profile, profileError, profileLoading] = useProfile();
@@ -28,8 +30,7 @@ const Home = () => {
 
   const currentUser = profile.user ?? { 'uid': 'guest' };
 
-  const { events, sports, users } = data;
-
+  const { events, notifications, sports, users } = data;
 
   const toggleEvent = (event, eventId, isCurrentUserOrganizer) => {
     if (isCurrentUserOrganizer) {
@@ -47,12 +48,22 @@ const Home = () => {
     }
   };
 
+  const addAlert = ({evToDel}) => {
+    const evt = events[evToDel]
+    const auid = Date.now()
+    const message = `${evt.sport} scheduled ${evt.datetime}, ${evt.location ?? ''} has been cancelled.`
+    updateNotifications({[`/notifications/${currentUser.uid}/${auid}`]: 
+                                        {title:evt.title ?? null, message:message}})
+
+  }
+
   const deleteEvent = () => {
     const newEvents = { ...events };
+    // AddAlert to add evToDel to alerts
+    addAlert({evToDel})
     delete newEvents[evToDel];
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
-    console.log(newEvents);
     updateEvent({ "/events": newEvents });
   };
   return (
