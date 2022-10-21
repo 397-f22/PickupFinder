@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Row from 'react-bootstrap/Row'
+import Row from "react-bootstrap/Row";
 import EventCard from "../eventCard/eventCard";
 import Container from "react-bootstrap/Container";
 import SportSelector from "../sportSelector/sportSelector";
@@ -7,16 +7,13 @@ import ConfirmModal from "./confirm";
 import { useDbData, useDbUpdate } from "../../utilities/firebase";
 import { useProfile } from "../../utilities/useProfile";
 
-
 const Home = () => {
   const [data, error] = useDbData("/");
   const [currentSport, setCurrentSport] = useState("Basketball");
   const [evToDel, setEvToDel] = useState(-1);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
-  const [updateEvent, result] = useDbUpdate(
-    "/"
-  );
-  const [updateNotifications, resultNotification] = useDbUpdate("/")
+  const [updateEvent, result] = useDbUpdate("/");
+  const [updateNotifications, resultNotification] = useDbUpdate("/");
 
   // user profile
   const [profile, profileError, profileLoading] = useProfile();
@@ -27,8 +24,7 @@ const Home = () => {
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
 
-
-  const currentUser = profile.user ?? { 'uid': 'guest' };
+  const currentUser = profile.user ?? { uid: "guest" };
 
   const { events, notifications, sports, users } = data;
 
@@ -48,19 +44,26 @@ const Home = () => {
     }
   };
 
-  const addAlert = ({evToDel}) => {
-    const evt = events[evToDel]
-    const auid = Date.now()
-    const message = `${evt.sport} scheduled ${evt.datetime}, ${evt.location ?? ''} has been cancelled.`
-    updateNotifications({[`/notifications/${currentUser.uid}/${auid}`]: 
-                                        {title:evt.title ?? null, message:message}})
-
-  }
+  const addAlert = ({ evToDel }) => {
+    const evt = events[evToDel];
+    const auid = Date.now();
+    const message = `${evt.sport} scheduled ${evt.datetime}, ${
+      evt.location ?? ""
+    } has been cancelled.`;
+    evt.attendees.forEach((att) =>
+      updateNotifications({
+        [`/notifications/${att}/${auid}`]: {
+          title: evt.title ?? null,
+          message: message,
+        },
+      })
+    );
+  };
 
   const deleteEvent = () => {
     const newEvents = { ...events };
     // AddAlert to add evToDel to alerts
-    addAlert({evToDel})
+    addAlert({ evToDel });
     delete newEvents[evToDel];
     setIsConfirmModalVisible(false);
     setEvToDel(-1);
